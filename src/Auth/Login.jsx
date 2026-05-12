@@ -1,11 +1,12 @@
 import { useId, useState } from "react";
 import { MdLockOutline, MdMailOutline, MdVisibility, MdVisibilityOff } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const HERO_IMAGE_SRC =
   "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&q=85&w=1800";
 
 export default function Login() {
+  const navigate = useNavigate();
   const emailId = useId();
   const passwordId = useId();
 
@@ -21,13 +22,14 @@ export default function Login() {
     setIsSubmitting(true);
     try {
       await new Promise((r) => setTimeout(r, 600));
+      navigate("/");
     } finally {
       setIsSubmitting(false);
     }
   }
 
   return (
-    <main className="grid min-h-dvh grid-cols-1 bg-white text-neutral-900 antialiased lg:grid-cols-2">
+    <main className="grid min-h-dvh w-full grid-cols-1 bg-white text-neutral-900 antialiased lg:grid-cols-2">
       <section className="order-2 flex flex-col justify-center bg-gradient-to-b from-neutral-100 to-neutral-50 px-5 py-10 sm:px-8 sm:py-14 lg:order-2 lg:px-12 lg:py-16 xl:px-16">
         <div className="mx-auto w-full max-w-[540px]">
           <div className="rounded-3xl border border-neutral-200/80 bg-white p-8 shadow-xl ring-1 ring-neutral-900/5 sm:p-10">

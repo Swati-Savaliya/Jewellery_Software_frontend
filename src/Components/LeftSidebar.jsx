@@ -1,15 +1,16 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
-import { MdChevronRight, MdDashboard, MdLogout } from "react-icons/md";
+import { MdDashboard, MdLogout, MdManageAccounts } from "react-icons/md";
 import { useLocation, useNavigate } from "react-router-dom";
 
 function pathToActiveKey(pathname) {
   const seg = pathname.replace(/^\//, "").split("/")[0];
   if (!seg) return "dashboard";
+  if (seg === "daily-transaction") return "daily-transactions";
   return seg;
 }
 
 /** One line, full text: shrink font from maxPx down to minPx until it fits (ResizeObserver). */
-function SingleLineFitText({ children, className = "", minPx = 8, maxPx = 14, flexible = true }) {
+export function SingleLineFitText({ children, className = "", minPx = 8, maxPx = 14, flexible = true }) {
   const ref = useRef(null);
   const text = typeof children === "string" ? children : String(children ?? "");
 
@@ -50,55 +51,49 @@ function SingleLineFitText({ children, className = "", minPx = 8, maxPx = 14, fl
 }
 
 const NAV_ITEMS = [
-  { key: "dashboard", label: "Dashboard", icon: MdDashboard, chevron: false },
+  { key: "dashboard", label: "Dashboard", icon: MdDashboard },
+  { key: "main-master-panel", label: "Main Master Penal", icon: MdManageAccounts },
   {
     key: "ledger-short",
     label: "Ledger Report",
     shortcutKey: "F1",
-    chevron: true,
   },
   {
     key: "daily-balance",
     label: "Daily Balance",
     shortcutKey: "F2",
-    chevron: true,
   },
   {
     key: "ledger-details",
     label: "Ledger Details",
     shortcutKey: "F3",
-    chevron: true,
   },
   {
     key: "account-summary",
     label: "Account Summary",
     shortcutKey: "F4",
-    chevron: false,
   },
   {
     key: "daily-transactions",
     label: "Daily Transactions",
     shortcutKey: "F5",
-    chevron: false,
   },
   {
     key: "cash-book",
     label: "Cash Book",
     shortcutKey: "F6",
-    chevron: false,
   },
-  { key: "gold-book", label: "Gold Book", shortcutKey: "F7", chevron: false },
-  { key: "silver-book", label: "Silver Book", shortcutKey: "F8", chevron: false },
+  { key: "gold-book", label: "Gold Book", shortcutKey: "F7" },
+  { key: "silver-book", label: "Silver Book", shortcutKey: "F8" },
   {
     key: "print-mail",
     label: "Print-Mail",
     shortcutKey: "Ctrl+P",
-    chevron: false,
-    navButtonClassName: ["mt-[210px]"],
+    navButtonClassName: ["mt-[150px]"],
   },
 ];
 
-function ShortcutKeyCap({ label, emphasized, className = "" }) {
+export function ShortcutKeyCap({ label, emphasized, className = "" }) {
   const isChord = String(label).includes("+") || String(label).length > 4;
   return (
     <span
@@ -213,18 +208,6 @@ export default function LeftSidebar({ onLogout, brand = "Jewellery ERP" }) {
                 <SingleLineFitText className={idleLabelIcon} minPx={8} maxPx={14}>
                   {item.label}
                 </SingleLineFitText>
-                {item.chevron ? (
-                  <MdChevronRight
-                    className={[
-                      "h-5 w-5 shrink-0 transition-colors sm:h-6 sm:w-6",
-                      showAsSelected
-                        ? "text-[#000000]"
-                        : isPrintMail
-                          ? "text-[#5d4d44]/90 group-hover:text-[#000000]"
-                          : "text-[#000000]/70 group-hover:text-[#000000]",
-                    ].join(" ")}
-                  />
-                ) : null}
               </button>
             );
           })}

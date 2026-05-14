@@ -1,4 +1,4 @@
-import { useEffect, useId, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   MdOutlineBalance,
   MdOutlineInventory2,
@@ -30,16 +30,16 @@ import {
 
 const CHART_TOOLTIP = {
   contentStyle: {
-    backgroundColor: "#fffefb",
-    border: "1px solid #D4C9BE",
-    borderRadius: "12px",
-    boxShadow: "0 10px 28px rgba(74, 56, 41, 0.12)",
+    backgroundColor: "#ffffff",
+    border: "1px solid #e2e8f0",
+    borderRadius: "10px",
+    boxShadow: "0 12px 32px rgba(15, 23, 42, 0.08)",
     fontSize: "12px",
     padding: "10px 12px",
   },
-  labelStyle: { color: "#2d2419", fontWeight: 700, marginBottom: "4px" },
-  itemStyle: { color: "#5c4a3a", paddingTop: "2px" },
-  cursor: { stroke: "#c9b8a8", strokeWidth: 1, strokeDasharray: "4 4", fill: "rgba(255, 254, 251, 0.45)" },
+  labelStyle: { color: "#0f172a", fontWeight: 700, marginBottom: "4px" },
+  itemStyle: { color: "#475569", paddingTop: "2px" },
+  cursor: { stroke: "#cbd5e1", strokeWidth: 1, strokeDasharray: "4 4", fill: "rgba(248, 250, 252, 0.9)" },
 };
 
 function formatInr(n) {
@@ -48,45 +48,6 @@ function formatInr(n) {
     currency: "INR",
     maximumFractionDigits: 0,
   }).format(n);
-}
-
-/** Faceted gem silhouette for headers (unique gradient id per instance). */
-function JewelDiamondMark({ className = "h-8 w-8 shrink-0" }) {
-  const uid = useId().replace(/:/g, "");
-  const gradId = `jewel-grad-${uid}`;
-  return (
-    <svg className={className} viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
-      <path
-        d="M20 5 35 16 28 33 12 33 5 16Z"
-        stroke="#b88920"
-        strokeWidth="1.1"
-        fill={`url(#${gradId})`}
-        fillOpacity={0.45}
-      />
-      <path d="M20 5 35 16 20 17.5 5 16Z" fill="#fffef8" fillOpacity={0.92} stroke="#d4af37" strokeWidth="0.65" />
-      <path d="M5 16 20 17.5 12 33Z" fill="#c9a227" fillOpacity={0.22} stroke="#a67c00" strokeWidth="0.45" />
-      <path d="M35 16 20 17.5 28 33Z" fill="#70563F" fillOpacity={0.12} stroke="#8a6918" strokeWidth="0.45" />
-      <path d="M12 33 20 17.5 28 33Z" fill="#f5ead8" fillOpacity={0.55} stroke="#c9a227" strokeWidth="0.4" />
-      <defs>
-        <linearGradient id={gradId} x1="5" y1="5" x2="35" y2="34" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#fffdf5" />
-          <stop offset="0.55" stopColor="#f0e0b8" />
-          <stop offset="1" stopColor="#c9a227" />
-        </linearGradient>
-      </defs>
-    </svg>
-  );
-}
-
-/** Small CSS rhombus accents — gold / silver / platinum jewellery tones. */
-function DiamondRhombusCluster({ className = "" }) {
-  return (
-    <div className={["flex flex-col items-center gap-2.5", className].filter(Boolean).join(" ")} aria-hidden>
-      <span className="h-11 w-11 rotate-45 rounded-lg border border-[#d4af37]/50 bg-gradient-to-br from-white via-[#fff8e6] to-[#e8c96a]/90 shadow-[inset_0_1px_0_rgba(255,255,255,0.95),0_10px_28px_rgba(201,162,39,0.2)]" />
-      <span className="h-6 w-6 rotate-45 rounded-md border border-slate-300/80 bg-gradient-to-br from-slate-50 to-slate-300/50 shadow-sm" />
-      <span className="h-4 w-4 rotate-45 rounded-sm border border-[#a59fe0]/70 bg-gradient-to-br from-[#f4f2ff] to-[#c9c2f0]/80" />
-    </div>
-  );
 }
 
 const INITIAL_TREND = [
@@ -239,10 +200,10 @@ export default function Dashboard() {
         sub: "Board · per g",
         value: live.goldRate,
         Icon: MdOutlineWorkspacePremium,
-        wrap: "bg-gradient-to-br from-[#fff9eb] via-[#fff4dc] to-[#f0e0b8] ring-[#d4af37]/45",
-        valueClass: "text-[#4a3410]",
-        badgeClass: "bg-[#fff3d6] text-[#6b4a0a] ring-1 ring-[#e8cf7a]/80",
-        iconTint: "text-[#9a7618]",
+        wrap: "border-l-[3px] border-l-amber-500 bg-white ring-1 ring-slate-200/90",
+        valueClass: "text-slate-900",
+        badgeClass: "bg-amber-50 text-amber-900 ring-1 ring-amber-200/70",
+        iconTint: "text-amber-600",
       },
       {
         key: "18k",
@@ -252,10 +213,10 @@ export default function Dashboard() {
         sub: "Board · per g",
         value: live.gold18Rate,
         Icon: MdOutlineWorkspacePremium,
-        wrap: "bg-gradient-to-br from-[#fffefb] to-[#efe8df] ring-[#d4c4b0]/90",
-        valueClass: "text-[#1a1510]",
-        badgeClass: "bg-[#faf4eb] text-[#5c4a38] ring-1 ring-[#e0d4c8]",
-        iconTint: "text-[#7a6552]",
+        wrap: "border-l-[3px] border-l-amber-400/90 bg-white ring-1 ring-slate-200/90",
+        valueClass: "text-slate-900",
+        badgeClass: "bg-slate-100 text-slate-800 ring-1 ring-slate-200/80",
+        iconTint: "text-slate-600",
       },
       {
         key: "ag",
@@ -265,10 +226,10 @@ export default function Dashboard() {
         sub: "Board · per g",
         value: live.silverRate,
         Icon: MdOutlineInventory2,
-        wrap: "bg-gradient-to-br from-slate-50 via-slate-50/90 to-slate-200/40 ring-slate-300/95",
-        valueClass: "text-slate-800",
-        badgeClass: "bg-slate-100 text-slate-700 ring-1 ring-slate-300/80",
-        iconTint: "text-slate-600",
+        wrap: "border-l-[3px] border-l-slate-400 bg-white ring-1 ring-slate-200/90",
+        valueClass: "text-slate-900",
+        badgeClass: "bg-slate-100 text-slate-700 ring-1 ring-slate-200/80",
+        iconTint: "text-slate-500",
       },
       {
         key: "pt",
@@ -278,10 +239,10 @@ export default function Dashboard() {
         sub: "Board · per g",
         value: live.platinumRate,
         Icon: MdOutlinePaid,
-        wrap: "bg-gradient-to-br from-[#f5f2ff] via-[#ebe6ff] to-[#d8d0f5]/60 ring-[#a59fe0]/50",
-        valueClass: "text-[#3d3566]",
-        badgeClass: "bg-[#ede9ff] text-[#3d2d66] ring-1 ring-[#c4b5fd]/70",
-        iconTint: "text-[#5c5280]",
+        wrap: "border-l-[3px] border-l-violet-500 bg-white ring-1 ring-slate-200/90",
+        valueClass: "text-slate-900",
+        badgeClass: "bg-violet-50 text-violet-900 ring-1 ring-violet-200/70",
+        iconTint: "text-violet-600",
       },
     ],
     [live.goldRate, live.gold18Rate, live.silverRate, live.platinumRate],
@@ -292,63 +253,56 @@ export default function Dashboard() {
   const hallHot = live.hallmarkPending >= 8;
 
   return (
-    <section className="box-border w-full min-w-0 max-w-none bg-[#f7f3ee] px-3 pb-12 pt-[6rem] sm:px-4 sm:pb-14 sm:pt-[90px] lg:px-6 lg:pb-16 xl:px-8">
+    <section className="box-border w-full min-w-0 max-w-none bg-slate-50/90 px-3 pb-12 pt-[6rem] sm:px-4 sm:pb-14 sm:pt-[90px] lg:px-6 lg:pb-16 xl:px-8">
       <div className="mx-auto w-full min-w-0 max-w-[1600px]">
-        <div
-          className="relative overflow-hidden rounded-3xl border border-[#cfc3b6]/90 bg-gradient-to-br from-[#fffefb] via-[#faf6f0] to-[#f0e8df] p-4 shadow-[0_1px_0_rgba(255,255,255,0.95)_inset,0_24px_60px_-28px_rgba(74,56,41,0.22)] sm:p-6 lg:p-8"
-        >
+        <div className="relative overflow-hidden rounded-3xl border border-slate-200/90 bg-white p-4 shadow-xl shadow-slate-300/25 ring-1 ring-slate-100 sm:p-6 lg:p-8">
           <div
-            className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-[#c9a227]/[0.07] blur-3xl"
+            className="pointer-events-none absolute inset-0 bg-[linear-gradient(125deg,rgba(251,191,36,0.07)_0%,transparent_38%,rgba(241,245,249,0.85)_55%,transparent_100%)]"
             aria-hidden
           />
-          <div className="pointer-events-none absolute -bottom-20 left-1/3 h-56 w-56 rounded-full bg-[#70563F]/[0.06] blur-3xl" aria-hidden />
-          <div
-            className="pointer-events-none absolute right-4 top-10 z-0 hidden opacity-[0.92] sm:block md:right-8 md:top-14 lg:right-10"
-            aria-hidden
-          >
-            <DiamondRhombusCluster />
-          </div>
+          <div className="pointer-events-none absolute -right-32 top-0 h-80 w-80 rounded-full bg-amber-400/[0.06] blur-3xl" aria-hidden />
+          <div className="pointer-events-none absolute -bottom-24 left-0 h-64 w-64 rounded-full bg-slate-400/[0.05] blur-3xl" aria-hidden />
 
           <div className="relative flex flex-col gap-6 lg:flex-row lg:items-stretch lg:justify-between lg:gap-8">
             <div className="min-w-0 flex-1 lg:max-w-md xl:max-w-lg">
-              <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-[#70563F]">
-                <span className="font-semibold uppercase tracking-[0.16em] text-[#70563F]/90">Store pulse</span>
-                <span className="hidden h-3 w-px bg-[#D4C9BE] sm:block" aria-hidden />
-                <time className="font-medium tabular-nums">{headlineDate}</time>
+              <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-slate-500">
+                <span className="font-semibold uppercase tracking-[0.14em] text-slate-600">Store pulse</span>
+                <span className="hidden h-3 w-px bg-slate-200 sm:block" aria-hidden />
+                <time className="font-medium tabular-nums text-slate-600">{headlineDate}</time>
               </div>
 
-              <div className="mt-4 rounded-2xl border border-[#e8dfd6]/90 bg-white/75 p-4 shadow-[inset_0_1px_0_rgba(255,255,255,1)] backdrop-blur-sm sm:p-5">
+              <div className="mt-4 rounded-2xl border border-slate-200/90 bg-gradient-to-br from-white to-slate-50/80 p-4 shadow-sm sm:p-5">
                 <div className="flex items-start justify-between gap-3">
                   <div>
-                    <p className="text-[11px] font-semibold uppercase tracking-wide text-[#70563F]">Today&apos;s collection</p>
-                    <p className="mt-1 text-3xl font-bold tabular-nums tracking-tight text-[#1a1510] sm:text-4xl">{formatInr(live.todaySales)}</p>
-                    <p className="mt-1 flex items-center gap-1.5 text-xs text-[#70563F]">
-                      <MdOutlineTrendingUp className="h-4 w-4 shrink-0 text-emerald-600/90" aria-hidden />
+                    <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">Today&apos;s collection</p>
+                    <p className="mt-1 text-3xl font-bold tabular-nums tracking-tight text-slate-900 sm:text-4xl">{formatInr(live.todaySales)}</p>
+                    <p className="mt-1 flex items-center gap-1.5 text-xs text-slate-500">
+                      <MdOutlineTrendingUp className="h-4 w-4 shrink-0 text-emerald-600" aria-hidden />
                       Counter + ornament bills (demo)
                     </p>
                   </div>
-                  <div className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-gradient-to-br from-[#fff6dc] to-[#f0e4c4] ring-1 ring-[#e8cf7a]/60">
-                    <MdOutlinePointOfSale className="h-6 w-6 text-[#8a6918]" aria-hidden />
+                  <div className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-amber-500/10 ring-1 ring-amber-500/20">
+                    <MdOutlinePointOfSale className="h-6 w-6 text-amber-700" aria-hidden />
                   </div>
                 </div>
-                <div className="mt-4 grid grid-cols-2 gap-3 border-t border-[#ece4d9] pt-4">
-                  <div className="rounded-xl bg-[#faf7f2] px-3 py-2.5 ring-1 ring-[#e8dfd6]/80">
-                    <p className="flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wide text-[#70563F]">
+                <div className="mt-4 grid grid-cols-2 gap-3 border-t border-slate-200/80 pt-4">
+                  <div className="rounded-xl border border-slate-100 bg-white px-3 py-2.5 shadow-sm">
+                    <p className="flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wide text-slate-500">
                       <MdOutlineBalance className="h-3.5 w-3.5" aria-hidden />
                       Gold out today
                     </p>
-                    <p className="mt-0.5 text-lg font-bold tabular-nums text-[#1a1510] sm:text-xl">
+                    <p className="mt-0.5 text-lg font-bold tabular-nums text-slate-900 sm:text-xl">
                       {live.goldGramsToday.toLocaleString("en-IN", { maximumFractionDigits: 1 })} g
                     </p>
-                    <p className="text-[10px] text-[#70563F]/85">22K eq. · estimate</p>
+                    <p className="text-[10px] text-slate-500">22K eq. · estimate</p>
                   </div>
-                  <div className="rounded-xl bg-[#faf7f2] px-3 py-2.5 ring-1 ring-[#e8dfd6]/80">
-                    <p className="flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wide text-[#70563F]">
+                  <div className="rounded-xl border border-slate-100 bg-white px-3 py-2.5 shadow-sm">
+                    <p className="flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wide text-slate-500">
                       <MdOutlinePercent className="h-3.5 w-3.5" aria-hidden />
                       Making (avg)
                     </p>
-                    <p className="mt-0.5 text-lg font-bold tabular-nums text-[#1a1510] sm:text-xl">{live.makingChargePct}%</p>
-                    <p className="text-[10px] text-[#70563F]/85">On tagged items</p>
+                    <p className="mt-0.5 text-lg font-bold tabular-nums text-slate-900 sm:text-xl">{live.makingChargePct}%</p>
+                    <p className="text-[10px] text-slate-500">On tagged items</p>
                   </div>
                 </div>
               </div>
@@ -357,10 +311,10 @@ export default function Dashboard() {
             <div className="min-w-0 flex-1 lg:min-w-[280px]">
               <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
                 <div>
-                  <h2 className="text-sm font-semibold uppercase tracking-wide text-[#4a3829]">Live board rates</h2>
-                  <p className="mt-1 text-[11px] leading-snug text-[#70563F]">Gold, silver &amp; platinum jewellery counters — tag-wise board / gram.</p>
+                  <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-800">Live board rates</h2>
+                  <p className="mt-1 text-[11px] leading-snug text-slate-500">Gold, silver &amp; platinum jewellery counters — tag-wise board / gram.</p>
                 </div>
-                <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-emerald-200/80 bg-emerald-50/90 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-emerald-800">
+                <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-emerald-200 bg-emerald-50 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-emerald-800">
                   <span className="relative flex h-1.5 w-1.5" aria-hidden>
                     <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400/80 opacity-75" />
                     <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500" />
@@ -369,16 +323,16 @@ export default function Dashboard() {
                 </span>
               </div>
               <div className="mb-2.5 flex flex-wrap gap-1.5">
-                <span className="inline-flex items-center gap-1 rounded-full bg-[#fff6dc] px-2 py-0.5 text-[10px] font-semibold text-[#6b4a0a] ring-1 ring-[#e8cf7a]/75">
-                  <span className="h-1.5 w-1.5 rounded-full bg-[#c9a227]" aria-hidden />
+                <span className="inline-flex items-center gap-1 rounded-full bg-amber-50 px-2 py-0.5 text-[10px] font-semibold text-amber-900 ring-1 ring-amber-200/80">
+                  <span className="h-1.5 w-1.5 rounded-full bg-amber-500" aria-hidden />
                   Gold
                 </span>
-                <span className="inline-flex items-center gap-1 rounded-full bg-slate-100 px-2 py-0.5 text-[10px] font-semibold text-slate-700 ring-1 ring-slate-300/80">
+                <span className="inline-flex items-center gap-1 rounded-full bg-slate-100 px-2 py-0.5 text-[10px] font-semibold text-slate-700 ring-1 ring-slate-200/90">
                   <span className="h-1.5 w-1.5 rounded-full bg-slate-400" aria-hidden />
                   Silver
                 </span>
-                <span className="inline-flex items-center gap-1 rounded-full bg-[#ede9ff] px-2 py-0.5 text-[10px] font-semibold text-[#3d2d66] ring-1 ring-[#c4b5fd]/70">
-                  <span className="h-1.5 w-1.5 rounded-full bg-[#7c6fbd]" aria-hidden />
+                <span className="inline-flex items-center gap-1 rounded-full bg-violet-50 px-2 py-0.5 text-[10px] font-semibold text-violet-900 ring-1 ring-violet-200/80">
+                  <span className="h-1.5 w-1.5 rounded-full bg-violet-500" aria-hidden />
                   Platinum
                 </span>
               </div>
@@ -388,10 +342,7 @@ export default function Dashboard() {
                   return (
                     <div
                       key={r.key}
-                      className={[
-                        "rounded-2xl border border-white/60 p-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.85)] ring-1 sm:p-4",
-                        r.wrap,
-                      ].join(" ")}
+                      className={["rounded-2xl border border-slate-100 p-3 shadow-sm sm:p-4", r.wrap].join(" ")}
                     >
                       <div className="flex items-start justify-between gap-2">
                         <div className="min-w-0">
@@ -403,14 +354,14 @@ export default function Dashboard() {
                           >
                             {r.jewelleryKind}
                           </span>
-                          <p className="mt-2 text-[10px] font-semibold uppercase tracking-wide text-[#70563F]/90">{r.label}</p>
+                          <p className="mt-2 text-[10px] font-semibold uppercase tracking-wide text-slate-500">{r.label}</p>
                           <p className="mt-2 text-xl font-bold tabular-nums sm:text-2xl">
                             <span className={r.valueClass}>₹{Number(r.value).toLocaleString("en-IN")}</span>
                           </p>
-                          <p className="mt-0.5 text-[10px] text-[#70563F]/80">{r.sub}</p>
-                          <p className="mt-1 text-[10px] leading-snug text-[#70563F]/75">{r.jewelleryHint}</p>
+                          <p className="mt-0.5 text-[10px] text-slate-500">{r.sub}</p>
+                          <p className="mt-1 text-[10px] leading-snug text-slate-500/90">{r.jewelleryHint}</p>
                         </div>
-                        <div className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-white/70 ring-1 ring-white/80">
+                        <div className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-slate-50 ring-1 ring-slate-200/80">
                           <RIcon className={["h-5 w-5", r.iconTint].join(" ")} aria-hidden />
                         </div>
                       </div>
@@ -421,85 +372,75 @@ export default function Dashboard() {
             </div>
 
             <div className="flex min-w-0 flex-col gap-3 lg:w-[min(100%,280px)] lg:shrink-0">
-              <h2 className="text-sm font-semibold uppercase tracking-wide text-[#4a3829]">Needs attention</h2>
+              <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-800">Needs attention</h2>
               <ul className="flex flex-col gap-2.5">
                 <li
                   className={[
                     "flex items-center justify-between gap-3 rounded-2xl border px-3.5 py-3 shadow-sm sm:px-4",
                     repairsHot
-                      ? "border-amber-200/90 bg-amber-50/90 ring-1 ring-amber-200/60"
-                      : "border-[#e8dfd6]/90 bg-white/80 ring-1 ring-[#ebe4dc]",
+                      ? "border-amber-200 bg-amber-50/90 ring-1 ring-amber-200/70"
+                      : "border-slate-200/90 bg-white ring-1 ring-slate-100",
                   ].join(" ")}
                 >
                   <div className="flex min-w-0 items-center gap-2.5">
-                    <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-white/90 ring-1 ring-[#e8dfd6]">
-                      <MdOutlineStackedBarChart className="h-5 w-5 text-[#70563F]" aria-hidden />
+                    <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-slate-50 ring-1 ring-slate-200/80">
+                      <MdOutlineStackedBarChart className="h-5 w-5 text-slate-600" aria-hidden />
                     </span>
                     <div className="min-w-0">
-                      <p className="text-xs font-semibold text-[#1a1510]">Repair jobs</p>
-                      <p className="text-[11px] text-[#70563F]">Workshop queue</p>
+                      <p className="text-xs font-semibold text-slate-900">Repair jobs</p>
+                      <p className="text-[11px] text-slate-500">Workshop queue</p>
                     </div>
                   </div>
-                  <span className="text-2xl font-bold tabular-nums text-[#1a1510]">{live.repairs}</span>
+                  <span className="text-2xl font-bold tabular-nums text-slate-900">{live.repairs}</span>
                 </li>
                 <li
                   className={[
                     "flex items-center justify-between gap-3 rounded-2xl border px-3.5 py-3 shadow-sm sm:px-4",
                     stockHot
-                      ? "border-rose-200/90 bg-rose-50/85 ring-1 ring-rose-200/50"
-                      : "border-[#e8dfd6]/90 bg-white/80 ring-1 ring-[#ebe4dc]",
+                      ? "border-rose-200 bg-rose-50 ring-1 ring-rose-200/60"
+                      : "border-slate-200/90 bg-white ring-1 ring-slate-100",
                   ].join(" ")}
                 >
                   <div className="flex min-w-0 items-center gap-2.5">
-                    <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-white/90 ring-1 ring-[#e8dfd6]">
-                      <MdOutlineNotificationsActive className="h-5 w-5 text-[#70563F]" aria-hidden />
+                    <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-slate-50 ring-1 ring-slate-200/80">
+                      <MdOutlineNotificationsActive className="h-5 w-5 text-slate-600" aria-hidden />
                     </span>
                     <div className="min-w-0">
-                      <p className="text-xs font-semibold text-[#1a1510]">Low stock SKUs</p>
-                      <p className="text-[11px] text-[#70563F]">Below reorder</p>
+                      <p className="text-xs font-semibold text-slate-900">Low stock SKUs</p>
+                      <p className="text-[11px] text-slate-500">Below reorder</p>
                     </div>
                   </div>
-                  <span className="text-2xl font-bold tabular-nums text-[#1a1510]">{live.lowStock}</span>
+                  <span className="text-2xl font-bold tabular-nums text-slate-900">{live.lowStock}</span>
                 </li>
                 <li
                   className={[
                     "flex items-center justify-between gap-3 rounded-2xl border px-3.5 py-3 shadow-sm sm:px-4",
                     hallHot
-                      ? "border-violet-200/90 bg-violet-50/80 ring-1 ring-violet-200/55"
-                      : "border-[#e8dfd6]/90 bg-white/80 ring-1 ring-[#ebe4dc]",
+                      ? "border-violet-200 bg-violet-50 ring-1 ring-violet-200/60"
+                      : "border-slate-200/90 bg-white ring-1 ring-slate-100",
                   ].join(" ")}
                 >
                   <div className="flex min-w-0 items-center gap-2.5">
-                    <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-white/90 ring-1 ring-[#e8dfd6]">
-                      <MdOutlineVerified className="h-5 w-5 text-[#70563F]" aria-hidden />
+                    <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-slate-50 ring-1 ring-slate-200/80">
+                      <MdOutlineVerified className="h-5 w-5 text-slate-600" aria-hidden />
                     </span>
                     <div className="min-w-0">
-                      <p className="text-xs font-semibold text-[#1a1510]">Hallmark queue</p>
-                      <p className="text-[11px] text-[#70563F]">HUID / portal</p>
+                      <p className="text-xs font-semibold text-slate-900">Hallmark queue</p>
+                      <p className="text-[11px] text-slate-500">HUID / portal</p>
                     </div>
                   </div>
-                  <span className="text-2xl font-bold tabular-nums text-[#1a1510]">{live.hallmarkPending}</span>
+                  <span className="text-2xl font-bold tabular-nums text-slate-900">{live.hallmarkPending}</span>
                 </li>
               </ul>
             </div>
           </div>
         </div>
 
-        <div className="mt-6 flex justify-center gap-2 sm:mt-8 sm:gap-3" aria-hidden>
-          {[6, 10, 14, 10, 6].map((s, i) => (
-            <span
-              key={i}
-              className="rotate-45 rounded-[2px] border border-[#cfc3b6]/50 bg-gradient-to-br from-white/90 to-[#f4ebe0]/80 shadow-sm"
-              style={{ width: s, height: s }}
-            />
-          ))}
-        </div>
-
         <div className="mt-6 grid gap-4 lg:mt-8 lg:grid-cols-12 lg:gap-5">
-          <div className="rounded-2xl border border-[#D4C9BE]/90 bg-gradient-to-b from-white to-[#faf7f2] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.9),0_10px_36px_-14px_rgba(112,86,63,0.1)] sm:p-5 lg:col-span-5">
-            <h2 className="text-base font-semibold text-[#0f0d0b]">Sales by category</h2>
-            <p className="mt-0.5 text-sm text-[#70563F]">Last 7 days — gold, silver, diamond / platinum counters (₹)</p>
-            <div className="mt-4 h-[260px] w-full min-w-0 rounded-2xl border border-[#ebe4dc]/90 bg-white/40 p-1 sm:h-[300px] sm:p-2 lg:h-[320px]">
+          <div className="rounded-2xl border border-slate-200/90 bg-white p-4 shadow-sm sm:p-5 lg:col-span-5">
+            <h2 className="text-base font-semibold text-slate-900">Sales by category</h2>
+            <p className="mt-0.5 text-sm text-slate-500">Last 7 days — gold, silver, diamond / platinum counters (₹)</p>
+            <div className="mt-4 h-[260px] w-full min-w-0 rounded-xl border border-slate-100 bg-slate-50/50 p-1 sm:h-[300px] sm:p-2 lg:h-[320px]">
               <ResponsiveContainer width="100%" height="100%">
                 <AreaChart data={trend} margin={{ top: 16, right: 10, left: 2, bottom: 4 }}>
                   <defs>
@@ -519,17 +460,17 @@ export default function Dashboard() {
                       <stop offset="100%" stopColor="#5c4a3d" stopOpacity={0.04} />
                     </linearGradient>
                   </defs>
-                  <CartesianGrid strokeDasharray="3 6" stroke="#e5dcd4" strokeOpacity={0.95} vertical={false} />
+                  <CartesianGrid strokeDasharray="3 6" stroke="#e2e8f0" strokeOpacity={0.95} vertical={false} />
                   <XAxis
                     dataKey="day"
-                    tick={{ fill: "#5c4a3a", fontSize: 12, fontWeight: 600 }}
+                    tick={{ fill: "#475569", fontSize: 12, fontWeight: 600 }}
                     tickMargin={10}
-                    axisLine={{ stroke: "#D4C9BE", strokeWidth: 1 }}
+                    axisLine={{ stroke: "#e2e8f0", strokeWidth: 1 }}
                     tickLine={false}
                   />
                   <YAxis
                     tickFormatter={(v) => `${(v / 1000).toFixed(0)}k`}
-                    tick={{ fill: "#70563F", fontSize: 11 }}
+                    tick={{ fill: "#64748b", fontSize: 11 }}
                     tickCount={5}
                     domain={[0, "auto"]}
                     axisLine={false}
@@ -546,7 +487,7 @@ export default function Dashboard() {
                     height={36}
                     iconType="circle"
                     iconSize={8}
-                    wrapperStyle={{ fontSize: "12px", color: "#4a3829", paddingTop: "8px", fontWeight: 600 }}
+                    wrapperStyle={{ fontSize: "12px", color: "#334155", paddingTop: "8px", fontWeight: 600 }}
                   />
                   <Area
                     type="monotone"
@@ -580,17 +521,19 @@ export default function Dashboard() {
             </div>
           </div>
 
-          <div className="rounded-2xl border border-[#D4C9BE]/90 bg-gradient-to-b from-white to-[#faf7f2] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.9),0_10px_36px_-14px_rgba(112,86,63,0.1)] sm:p-5 lg:col-span-3">
+          <div className="rounded-2xl border border-slate-200/90 bg-white p-4 shadow-sm sm:p-5 lg:col-span-3">
             <div className="flex items-start justify-between gap-2">
               <div>
-                <h2 className="text-base font-semibold text-[#0f0d0b]">Metal mix (today)</h2>
-                <p className="mt-0.5 text-sm text-[#70563F]">
+                <h2 className="text-base font-semibold text-slate-900">Metal mix (today)</h2>
+                <p className="mt-0.5 text-sm text-slate-500">
                   Gold, silver &amp; premium jewellery share — last day (demo; split platinum in master when you wire data).
                 </p>
               </div>
-              <JewelDiamondMark className="h-9 w-9 shrink-0 sm:h-10 sm:w-10" />
+              <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-amber-500/10 ring-1 ring-amber-500/25 sm:h-11 sm:w-11">
+                <MdOutlineWorkspacePremium className="h-5 w-5 text-amber-700 sm:h-6 sm:w-6" aria-hidden />
+              </div>
             </div>
-            <div className="mt-4 h-[260px] w-full min-w-0 rounded-2xl border border-[#ebe4dc]/90 bg-white/40 p-1 sm:h-[300px] sm:p-2 lg:h-[320px]">
+            <div className="mt-4 h-[260px] w-full min-w-0 rounded-xl border border-slate-100 bg-slate-50/50 p-1 sm:h-[300px] sm:p-2 lg:h-[320px]">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={metalMix} margin={{ top: 20, right: 8, left: 4, bottom: 8 }} barCategoryGap="18%">
                   <defs>
@@ -607,13 +550,13 @@ export default function Dashboard() {
                       <stop offset="100%" stopColor="#5c4038" />
                     </linearGradient>
                   </defs>
-                  <CartesianGrid strokeDasharray="3 6" stroke="#e5dcd4" strokeOpacity={0.95} vertical={false} />
+                  <CartesianGrid strokeDasharray="3 6" stroke="#e2e8f0" strokeOpacity={0.95} vertical={false} />
                   <XAxis
                     dataKey="metal"
                     type="category"
-                    tick={{ fill: "#3d3028", fontSize: 12, fontWeight: 700 }}
+                    tick={{ fill: "#334155", fontSize: 12, fontWeight: 700 }}
                     tickMargin={10}
-                    axisLine={{ stroke: "#D4C9BE", strokeWidth: 1 }}
+                    axisLine={{ stroke: "#e2e8f0", strokeWidth: 1 }}
                     tickLine={false}
                   />
                   <YAxis
@@ -621,7 +564,7 @@ export default function Dashboard() {
                     domain={[0, 100]}
                     ticks={[0, 25, 50, 75, 100]}
                     tickFormatter={(v) => `${v}%`}
-                    tick={{ fill: "#70563F", fontSize: 11 }}
+                    tick={{ fill: "#64748b", fontSize: 11 }}
                     axisLine={false}
                     tickLine={false}
                     width={42}
@@ -631,7 +574,7 @@ export default function Dashboard() {
                     <LabelList
                       dataKey="value"
                       position="top"
-                      fill="#2d2419"
+                      fill="#0f172a"
                       fontSize={12}
                       fontWeight={700}
                       formatter={(v) => `${v}%`}
@@ -643,7 +586,7 @@ export default function Dashboard() {
                           : entry.metal === "Silver"
                             ? "url(#barFillSilver)"
                             : "url(#barFillDiamond)";
-                      return <Cell key={entry.metal} fill={grad} stroke="#fffdfb" strokeWidth={1} />;
+                      return <Cell key={entry.metal} fill={grad} stroke="#f8fafc" strokeWidth={1} />;
                     })}
                   </Bar>
                 </BarChart>
@@ -651,17 +594,17 @@ export default function Dashboard() {
             </div>
           </div>
 
-          <div className="flex flex-col gap-4 rounded-2xl border border-[#D4C9BE]/90 bg-gradient-to-b from-white to-[#faf7f2] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.9),0_10px_36px_-14px_rgba(112,86,63,0.1)] sm:p-5 lg:col-span-4">
+          <div className="flex flex-col gap-4 rounded-2xl border border-slate-200/90 bg-white p-4 shadow-sm sm:p-5 lg:col-span-4">
             <div>
-              <h2 className="text-base font-semibold text-[#0f0d0b]">Ornament mix</h2>
-              <p className="mt-0.5 text-sm text-[#70563F]">Category share (counter, demo %)</p>
+              <h2 className="text-base font-semibold text-slate-900">Ornament mix</h2>
+              <p className="mt-0.5 text-sm text-slate-500">Category share (counter, demo %)</p>
             </div>
-            <div className="h-[220px] w-full min-w-0 rounded-2xl border border-[#ebe4dc]/90 bg-white/40 p-1 sm:h-[260px] sm:p-2">
+            <div className="h-[220px] w-full min-w-0 rounded-xl border border-slate-100 bg-slate-50/50 p-1 sm:h-[260px] sm:p-2">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart margin={{ top: 4, right: 4, bottom: 8, left: 4 }}>
                   <defs>
                     <filter id="pieSoftShadow" x="-20%" y="-20%" width="140%" height="140%">
-                      <feDropShadow dx="0" dy="2" stdDeviation="3" floodColor="#4a3829" floodOpacity="0.12" />
+                      <feDropShadow dx="0" dy="2" stdDeviation="3" floodColor="#0f172a" floodOpacity="0.08" />
                     </filter>
                   </defs>
                   <Pie
@@ -673,15 +616,15 @@ export default function Dashboard() {
                     innerRadius="52%"
                     outerRadius="78%"
                     paddingAngle={2.8}
-                    stroke="#faf7f2"
+                    stroke="#f1f5f9"
                     strokeWidth={2}
                     cornerRadius={4}
                     style={{ filter: "url(#pieSoftShadow)" }}
                     label={({ percent }) => ((percent ?? 0) >= 0.06 ? `${((percent ?? 0) * 100).toFixed(0)}%` : "")}
-                    labelLine={{ stroke: "#c4b5a8", strokeWidth: 1 }}
+                    labelLine={{ stroke: "#cbd5e1", strokeWidth: 1 }}
                   >
                     {pieData.map((entry) => (
-                      <Cell key={entry.name} fill={entry.fill} stroke="#fffefb" strokeWidth={1.5} />
+                      <Cell key={entry.name} fill={entry.fill} stroke="#ffffff" strokeWidth={1.5} />
                     ))}
                   </Pie>
                   <Tooltip {...CHART_TOOLTIP} formatter={(value, name) => [`${value}%`, name]} />
@@ -691,23 +634,23 @@ export default function Dashboard() {
                     align="center"
                     iconType="circle"
                     iconSize={7}
-                    wrapperStyle={{ fontSize: "11px", color: "#5c4a3a", fontWeight: 600, paddingTop: "4px" }}
+                    wrapperStyle={{ fontSize: "11px", color: "#475569", fontWeight: 600, paddingTop: "4px" }}
                   />
                 </PieChart>
               </ResponsiveContainer>
             </div>
-            <div className="border-t border-[#ECE4D9] pt-3">
-              <h3 className="text-xs font-semibold uppercase tracking-wide text-[#70563F]">Counter feed</h3>
+            <div className="border-t border-slate-200/90 pt-3">
+              <h3 className="text-xs font-semibold uppercase tracking-wide text-slate-500">Counter feed</h3>
               <ul className="mt-2 max-h-[140px] space-y-2 overflow-y-auto pr-1 text-sm">
                 {feed.map((row) => (
                   <li
                     key={row.id}
-                    className="flex flex-wrap items-baseline justify-between gap-x-2 gap-y-1 rounded-lg bg-white/70 px-2.5 py-2 ring-1 ring-[#ebe4dc]"
+                    className="flex flex-wrap items-baseline justify-between gap-x-2 gap-y-1 rounded-lg border border-slate-100 bg-slate-50/80 px-2.5 py-2"
                   >
-                    <span className="font-mono text-[11px] font-semibold text-[#70563F]">{row.bill}</span>
-                    <span className="text-[11px] text-[#70563F]/80">{row.at}</span>
-                    <span className="w-full text-[13px] leading-snug text-[#1a1510]">{row.detail}</span>
-                    <span className="ml-auto font-semibold tabular-nums text-[#5c432f]">{formatInr(row.amount)}</span>
+                    <span className="font-mono text-[11px] font-semibold text-slate-600">{row.bill}</span>
+                    <span className="text-[11px] text-slate-400">{row.at}</span>
+                    <span className="w-full text-[13px] leading-snug text-slate-800">{row.detail}</span>
+                    <span className="ml-auto font-semibold tabular-nums text-slate-900">{formatInr(row.amount)}</span>
                   </li>
                 ))}
               </ul>
@@ -716,15 +659,15 @@ export default function Dashboard() {
         </div>
 
         <div className="mt-6 grid gap-4 lg:mt-8 lg:grid-cols-12 lg:gap-5">
-          <div className="overflow-hidden rounded-2xl border border-[#D4C9BE]/90 bg-gradient-to-b from-white to-[#faf7f2] shadow-[inset_0_1px_0_rgba(255,255,255,0.9),0_10px_36px_-14px_rgba(112,86,63,0.1)] lg:col-span-8">
-            <div className="border-b border-[#ECE4D9] bg-[#FFFCF8]/80 px-4 py-3 sm:px-6 sm:py-4">
-              <h2 className="text-base font-semibold text-[#0f0d0b]">Top moving jewellery</h2>
-              <p className="mt-0.5 text-sm text-[#70563F]">Fast sellers — weights &amp; values refresh on demo</p>
+          <div className="overflow-hidden rounded-2xl border border-slate-200/90 bg-white shadow-sm lg:col-span-8">
+            <div className="border-b border-slate-200/90 bg-slate-50/80 px-4 py-3 sm:px-6 sm:py-4">
+              <h2 className="text-base font-semibold text-slate-900">Top moving jewellery</h2>
+              <p className="mt-0.5 text-sm text-slate-500">Fast sellers — weights &amp; values refresh on demo</p>
             </div>
             <div className="overflow-x-auto">
               <table className="w-full min-w-[640px] text-left text-sm">
                 <thead>
-                  <tr className="border-b border-[#ECE4D9] bg-[#F9F9F9]/90 text-xs font-semibold uppercase tracking-wide text-[#70563F]">
+                  <tr className="border-b border-slate-200/90 bg-slate-50 text-xs font-semibold uppercase tracking-wide text-slate-500">
                     <th className="px-4 py-3 sm:px-6">SKU</th>
                     <th className="px-3 py-3">Item</th>
                     <th className="px-3 py-3">Metal</th>
@@ -732,11 +675,11 @@ export default function Dashboard() {
                     <th className="px-4 py-3 text-right tabular-nums sm:px-6">Value</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[#ECE4D9]">
+                <tbody className="divide-y divide-slate-100">
                   {topItems.map((row) => (
-                    <tr key={row.sku} className="bg-white/60 transition-colors hover:bg-[#fffdf8]">
-                      <td className="px-4 py-3 font-mono text-xs text-[#70563F] sm:px-6">{row.sku}</td>
-                      <td className="max-w-[14rem] truncate px-3 py-3 font-medium text-[#1a1510]" title={row.name}>
+                    <tr key={row.sku} className="bg-white transition-colors hover:bg-slate-50/90">
+                      <td className="px-4 py-3 font-mono text-xs text-slate-500 sm:px-6">{row.sku}</td>
+                      <td className="max-w-[14rem] truncate px-3 py-3 font-medium text-slate-900" title={row.name}>
                         {row.name}
                       </td>
                       <td className="px-3 py-3">
@@ -744,17 +687,17 @@ export default function Dashboard() {
                           className={[
                             "inline-flex rounded-full px-2.5 py-0.5 text-xs font-semibold",
                             row.metal.includes("Gold")
-                              ? "bg-[#fff6dc] text-[#7a5a12] ring-1 ring-[#e8cf7a]/80"
+                              ? "bg-amber-50 text-amber-900 ring-1 ring-amber-200/80"
                               : row.metal.includes("Silver")
-                                ? "bg-slate-100 text-slate-700 ring-1 ring-slate-200"
-                                : "bg-[#f3ebe8] text-[#5c4038] ring-1 ring-[#e8dfd6]",
+                                ? "bg-slate-100 text-slate-700 ring-1 ring-slate-200/90"
+                                : "bg-stone-100 text-stone-800 ring-1 ring-stone-200/80",
                           ].join(" ")}
                         >
                           {row.metal}
                         </span>
                       </td>
-                      <td className="px-3 py-3 text-right tabular-nums font-medium text-[#1a1510]">{row.qty}</td>
-                      <td className="px-4 py-3 text-right tabular-nums font-semibold text-[#1a1510] sm:px-6">{formatInr(row.value)}</td>
+                      <td className="px-3 py-3 text-right tabular-nums font-medium text-slate-900">{row.qty}</td>
+                      <td className="px-4 py-3 text-right tabular-nums font-semibold text-slate-900 sm:px-6">{formatInr(row.value)}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -762,24 +705,24 @@ export default function Dashboard() {
             </div>
           </div>
 
-          <div className="rounded-2xl border border-[#D4C9BE]/90 bg-[#EDE8E2]/50 p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.5)] sm:p-6 lg:col-span-4">
-            <h2 className="text-base font-semibold text-[#0f0d0b]">Shortcuts</h2>
-            <p className="mt-1 text-sm text-[#70563F]">Hallmark, tagging, schemes</p>
+          <div className="rounded-2xl border border-slate-800/10 bg-gradient-to-br from-slate-900 to-slate-800 p-4 text-slate-100 shadow-lg shadow-slate-900/20 sm:p-6 lg:col-span-4">
+            <h2 className="text-base font-semibold text-white">Shortcuts</h2>
+            <p className="mt-1 text-sm text-slate-400">Hallmark, tagging, schemes</p>
             <ul className="mt-4 space-y-3 text-sm">
-              <li className="flex items-center gap-2 rounded-lg bg-white/70 px-3 py-2.5 text-[#1a1510] ring-1 ring-[#e8e1da]">
-                <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[#c9a227]" aria-hidden />
-                <strong className="font-semibold text-[#70563F]">HUID</strong> batch upload from hallmark portal
+              <li className="flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-3 py-2.5 text-slate-200 backdrop-blur-sm">
+                <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-amber-400" aria-hidden />
+                <strong className="font-semibold text-amber-200/95">HUID</strong> batch upload from hallmark portal
               </li>
-              <li className="flex items-center gap-2 rounded-lg bg-white/70 px-3 py-2.5 text-[#1a1510] ring-1 ring-[#e8e1da]">
-                <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[#70563F]/50" aria-hidden />
+              <li className="flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-3 py-2.5 text-slate-200 backdrop-blur-sm">
+                <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-slate-400" aria-hidden />
                 Old gold exchange rate slab — master
               </li>
-              <li className="flex items-center gap-2 rounded-lg bg-white/70 px-3 py-2.5 text-[#1a1510] ring-1 ring-[#e8e1da]">
-                <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[#70563F]/50" aria-hidden />
+              <li className="flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-3 py-2.5 text-slate-200 backdrop-blur-sm">
+                <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-slate-400" aria-hidden />
                 Gold saving scheme maturity list
               </li>
-              <li className="flex items-center gap-2 rounded-lg bg-white/70 px-3 py-2.5 text-[#1a1510] ring-1 ring-[#e8e1da]">
-                <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[#70563F]/50" aria-hidden />
+              <li className="flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-3 py-2.5 text-slate-200 backdrop-blur-sm">
+                <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-slate-400" aria-hidden />
                 Print-mail &amp; barcode labels (F-keys)
               </li>
             </ul>

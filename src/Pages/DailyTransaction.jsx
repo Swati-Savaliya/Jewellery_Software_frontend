@@ -4,8 +4,6 @@ const BG = "#F5F1E4";
 const RULE = "#a0a0a0";
 const VALUE_BLUE = "#0b5ed7";
 const CASH_MAROON = "#7b1111";
-const FOOTER_KEY = "#c41e1e";
-const FOOTER_HINT = "#0b5ed7";
 const HEADER_BROWN = "#70563F";
 const LABEL_PALE_GREEN = "#f0f9f0";
 const TYPE_BORDER_IDLE = "#d4d4d4";
@@ -22,10 +20,11 @@ const TX_PAIRS = [
   { left: { key: "orderPlus", display: "+ Order" }, right: { key: "repairMinus", display: "- Repair" } },
 ];
 
+/** Shown in footer; `key` is the physical key, `hint` matches keyboard handler behaviour. */
 const FOOTER_SHORTCUTS = [
-  { id: "tab", key: "TAB", hint: "DATE CHANGE" },
-  { id: "pgup", key: "PG UP", hint: "PREV DATE" },
-  { id: "pgdn", key: "PG DOWN", hint: "NEXT DATE" },
+  { id: "tab", key: "Tab", hint: "CHANGE DATE" },
+  { id: "pgup", key: "PgUp", hint: "PREV. DATE" },
+  { id: "pgdn", key: "PgDn", hint: "NEXT DATE" },
 ];
 
 const INITIAL_AMOUNTS = {
@@ -341,13 +340,37 @@ export default function DailyTransaction() {
           </div>
         </div>
 
-        <footer className="mt-6 flex min-w-0 flex-nowrap items-center justify-center gap-x-4 overflow-x-auto pb-1 text-sm font-bold [-ms-overflow-style:none] [scrollbar-width:none] sm:justify-start sm:gap-x-6 sm:text-base [&::-webkit-scrollbar]:hidden">
-          {FOOTER_SHORTCUTS.map((row) => (
-            <div key={row.id} className="inline-flex shrink-0 items-baseline gap-1 whitespace-nowrap">
-              <span style={{ color: FOOTER_KEY }}>[{row.key}]</span>
-              <span style={{ color: FOOTER_HINT }}>{row.hint}</span>
+        <footer
+          className="mt-6 pb-1"
+          aria-label="Keyboard shortcuts for date navigation"
+        >
+          <div
+            className="rounded-xl border bg-white px-3 py-3 shadow-[0_1px_2px_rgba(0,0,0,0.04)] sm:px-4 sm:py-3.5"
+            style={{ borderColor: TYPE_BORDER_IDLE }}
+          >
+            <div
+              role="list"
+              className="grid w-full min-w-0 grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-x-8 sm:gap-y-0"
+            >
+              {FOOTER_SHORTCUTS.map((row) => (
+                <div
+                  key={row.id}
+                  role="listitem"
+                  className="flex min-w-0 items-center justify-center gap-3 sm:min-h-12 sm:gap-3.5 sm:px-3 sm:py-1"
+                >
+                  <kbd
+                    className="inline-flex h-8 min-w-[3.5rem] shrink-0 items-center justify-center rounded-md border bg-[#f8f8f6] px-2 font-mono text-[0.75rem] font-bold leading-none text-neutral-800 shadow-[inset_0_-1px_0_rgba(0,0,0,0.05)] sm:h-9 sm:min-w-[3.75rem] sm:px-2.5 sm:text-sm"
+                    style={{ borderColor: TYPE_BORDER_IDLE }}
+                  >
+                    {row.key}
+                  </kbd>
+                  <span className="min-w-0 text-left text-xs font-semibold uppercase leading-tight tracking-wide text-neutral-600 sm:text-sm">
+                    {row.hint}
+                  </span>
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
         </footer>
       </div>
     </div>
